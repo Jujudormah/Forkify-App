@@ -11,8 +11,7 @@ const timeout = function (s) {
   });
 };
 
-// NEW API URL (instead of the one shown in the video)
-// https://forkify-api.jonas.io
+// NEW API URL: https://forkify-api.jonas.io
 
 ///////////////////////////////////////
 const controlRecipes = async function () {
@@ -27,15 +26,12 @@ const controlRecipes = async function () {
 
     // 2. Rendering recipe
     recipeView.render(model.state.recipe);
-  } catch (err) {
-    alert(err);
+  } catch (error) {
+    recipeView.renderError();
   }
 };
-controlRecipes();
 
-["hashchange", "load"].forEach((event) =>
-  window.addEventListener(event, controlRecipes),
-);
-
-// window.addEventListener("hashchange", controlRecipes);
-// window.addEventListener("load", controlRecipes);
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
